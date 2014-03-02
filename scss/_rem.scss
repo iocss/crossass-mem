@@ -1,0 +1,36 @@
+// Crossass Mem: Rem Extension
+//
+// Copyright (c) 2014 Whizark
+// @category rem
+
+// Gets the base rem value
+// @function x-rem-base
+// @return   {Number} The base rem value
+@function x-rem-base() {
+    @return x-config('x.mem.rem-base');
+}
+
+// Converts px value(s) to rem based on a base rem value
+// @function x-rem
+// @param    $values   {Number|String|List} The px value(s) to convert to rem
+// @param    $rem-base {String}             The context for the mem
+// @return             {Number|String|List} The converted rem value(s)
+@function x-rem-calc($values, $rem-base: null) {
+    @if type-of($values) == 'number' or type-of($values) == 'string' {
+        @return x-mem--px-to-rem($values, $rem-base);
+    }
+
+    $length: length($values);
+
+    @if $length == 1 {
+        @return x-mem--px-to-rem(nth($values, 1), $rem-base);
+    }
+
+    $rem-values: ();
+
+    @for $i from 1 through $length {
+        $rem-values: append($rem-values, x-mem--px-to-rem(nth($values, $i), $rem-base));
+    }
+
+    @return $rem-values;
+}
