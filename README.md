@@ -42,15 +42,15 @@ Unit | Relative to    | Use case |
 --- | --- | --- |
 em | parent element | [em](http://jsfiddle.net/whizark/GA8hN/)
 rem | root (html) | [rem](http://jsfiddle.net/whizark/HT6UD/)
-mem | any | [mem](http://jsfiddle.net/whizark/hkR7z/) |
+mem | any | [mem](http://jsfiddle.net/whizark/hkR7z/)
 
 The table below is a comparison table about the scalability against each kind of modification.
 
 Unit | Base font-size | Structure | Module font-sizing
 --- | --- | --- | --- | ---
-em   | [o](http://jsfiddle.net/whizark/3LPb6/) | [x](http://jsfiddle.net/whizark/8n7g8/) | [o](http://jsfiddle.net/whizark/2RHqp/)
-rem  | [o](http://jsfiddle.net/whizark/mSPuD/) | [o](http://jsfiddle.net/whizark/KcG86/) | [x](http://jsfiddle.net/whizark/7Vhu7/)
-mem  | [o](http://jsfiddle.net/whizark/rrsME/) | [o](http://jsfiddle.net/whizark/39dS8/) | [o](http://jsfiddle.net/whizark/jyBtL/)
+em   | [Good](http://jsfiddle.net/whizark/3LPb6/) | **[Poor](http://jsfiddle.net/whizark/8n7g8/)** | [Good](http://jsfiddle.net/whizark/2RHqp/)
+rem  | [Good](http://jsfiddle.net/whizark/mSPuD/) | [Good](http://jsfiddle.net/whizark/KcG86/) | **[Poor](http://jsfiddle.net/whizark/7Vhu7/)**
+mem  | [Good](http://jsfiddle.net/whizark/rrsME/) | [Good](http://jsfiddle.net/whizark/39dS8/) | [Good](http://jsfiddle.net/whizark/jyBtL/)
 
 With Crossass Mem, you can easily/flexibly handle rem-based sizing.
 
