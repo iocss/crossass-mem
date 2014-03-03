@@ -3,7 +3,7 @@
 // Copyright (c) 2014 Whizark
 // @category mem
 
-// The html and body font-size for the base rem value
+// The html font-size for the base rem value
 @include x-config('x.mem.rem-base', 16px, $default: true);
 
 // The current context for the base mem value
