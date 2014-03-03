@@ -65,7 +65,7 @@
 // @param    $context {String}             The context for the mem
 // @return            {Number|String|List} The converted rem value(s)
 @function x-mem($values, $context: null) {
-    @return call('x-mem--calc', 'x-mem--to-rem', $values, $context);
+    @return x-mem--calc('x-mem--to-rem', $values, $context);
 }
 
 // Converts mem value(s) to px based on a mem context
@@ -74,7 +74,7 @@
 // @param    $context {String}             The context for the mem
 // @return            {Number|String|List} The converted px value(s)
 @function x-mem-fallback($values, $context: null) {
-    @return call('x-mem--calc', 'x-mem--to-px', $values, $context);
+    @return x-mem--calc('x-mem--to-px', $values, $context);
 }
 
 // Calculates rem/px representation of mem value(s) based on a mem context
