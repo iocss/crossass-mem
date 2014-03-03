@@ -31,10 +31,10 @@
 // @return            {Number}      The base mem value for the context
 @function x-mem-base($context: null, $value: null) {
     @if $value == null {
-        $value: x-mem--px-to-rem(x-mem--get-contextual-mem-base($context));
+        $value: x-mem--get-contextual-mem-base($context);
 
         @if $value == null {
-            @return x-mem--px-to-rem(x-config('x.mem.rem-base'));
+            @return 1rem;
         }
 
         @return $value;
@@ -53,10 +53,10 @@
     $value: x-mem--get-contextual-mem-base($context);
 
     @if $value == null {
-        @return x-config('x.mem.rem-base');
+        @return 1rem;
     }
 
-    @return $value;
+    @return x-mem--rem-to-px($value);
 }
 
 // Converts mem value(s) to rem based on a mem context
@@ -121,8 +121,7 @@
         $mem-base: x-mem--get-contextual-mem-base(null);
     }
 
-    $px: x-mem--strip-unit($value) * x-mem--strip-unit($mem-base);
-    $value: $px / x-mem--strip-unit(x-config('x.mem.rem-base')) * 1rem;
+    $value: x-mem--strip-unit($value) * x-mem--strip-unit($mem-base) * 1rem;
 
     @if ($value == 0rem) {
         $value: 0;
@@ -146,8 +145,8 @@
         $mem-base: x-mem--get-contextual-mem-base(null);
     }
 
-    $rem: x-mem--strip-unit($mem-base) / x-mem--strip-unit(x-config('x.mem.rem-base'));
-    $value: x-mem--strip-unit($rem) * x-mem--strip-unit($mem-base) * 1px;
+    $value: x-mem--strip-unit($value) * x-mem--strip-unit($mem-base) * 1rem;
+    $value: x-mem--rem-to-px($value);
 
     @if ($value == 0px) {
         $value: 0;
@@ -156,7 +155,7 @@
     @return $value;
 }
 
-// Calculates rem representation of a px value based on the base rem value
+// Calculates rem representation of a px value based on a base rem value
 // @function x-mem--px-to-rem
 // @private
 // @param    $value    {Number|String} The px value to calculate rem
@@ -174,6 +173,30 @@
     $value: x-mem--strip-unit($value) / x-mem--strip-unit($rem-base) * 1rem;
 
     @if ($value == 0rem) {
+        $value: 0;
+    }
+
+    @return $value;
+}
+
+// Calculates px representation of a rem value based on a base rem value
+// @function x-mem--rem-to-px
+// @private
+// @param    $value    {Number|String} The rem value to calculate px
+// @param    $rem-base {Number}        The base rem value for the rem value
+// @return             {Number|String} The calculated px value
+@function x-mem--rem-to-px($value, $rem-base: null) {
+    @if $value == 'auto' {
+        @return $value;
+    }
+
+    @if $rem-base == null {
+        $rem-base: x-config('x.mem.rem-base');
+    }
+
+    $value: x-mem--strip-unit($value) * x-mem--strip-unit($rem-base) * 1px;
+
+    @if ($value == 0px) {
         $value: 0;
     }
 
@@ -246,7 +269,7 @@
         $context: '-base';
     }
 
-    $value: x-config('x.mem.-context.' + $context, x-mem--strip-unit($value) * 1px);
+    $value: x-config('x.mem.-context.' + $context, x-mem--strip-unit($value) * 1rem);
 
     @return $value;
 }
