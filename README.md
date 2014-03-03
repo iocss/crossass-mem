@@ -74,7 +74,7 @@ or just copy ```crossass-mem``` folder and ```crosass-config``` folder of [Cross
 @import 'bower_components/crossass-config/scss/config';
 @import 'bower_components/crossass-mem/scss/mem';
 // Import only if you want to use x-rem-cal() to convert px to rem
-@import 'bower_components/crossass-mem/scss/mem';
+@import 'bower_components/crossass-mem/scss/rem';
 ```
 
 or
@@ -83,7 +83,7 @@ or
 @import 'your-folder/crossass-config/scss/config';
 @import 'your-folder/crossass-mem/scss/mem';
 // Import only if you use x-rem-cal() to convert px to rem
-@import 'your-folder/crossass-mem/scss/mem';
+@import 'your-folder/crossass-mem/scss/rem';
 ```
 
 ### Configuration
