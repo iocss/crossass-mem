@@ -82,7 +82,7 @@ or
 ```scss
 @import 'your-folder/crossass-config/scss/config';
 @import 'your-folder/crossass-mem/scss/mem';
-// Import only if you use x-rem-cal() to convert px to rem
+// Import only if you want to use x-rem-cal() to convert px to rem
 @import 'your-folder/crossass-mem/scss/rem';
 ```
 
