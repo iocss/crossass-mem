@@ -13,16 +13,16 @@ html {
 }
 article {
     // Defines the base MEM value for this module
-    @include x-mem-base(x-rem-calc(12px));  // 1Mem = .75rem = 12px
+    @include x-mem-base(x-rem-calc(12px));  // 1Mem = .75Rem (12px)
     // Or pass rem value directly
     // @include x-mem-base(.75rem);
 
-    font-size: x-mem-base-fallback();       // 12px as the fallback
-    font-size: x-mem-base();                // .75Rem = 12px = 1Mem
+    font-size: x-mem-base-fallback();       // 12px the fallback below
+    font-size: x-mem-base();                // .75Rem = 1Mem (12px)
 
     h1 {
-        font-size: x-mem-fallback(2)        // 24px as the fallback
-        font-size: x-mem(2);                // 1.5Rem = 24px = 2Mem
+        font-size: x-mem-fallback(2)        // 24px: the fallback below
+        font-size: x-mem(2);                // 1.5Rem = .75Rem * 2Mem (24px)
     }
 }
 ```
