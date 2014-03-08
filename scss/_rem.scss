@@ -16,21 +16,5 @@
 // @param    $rem-base {String}             The context for the mem
 // @return             {Number|String|List} The converted rem value(s)
 @function x-rem-calc($values, $rem-base: null) {
-    @if type-of($values) == 'number' or type-of($values) == 'string' {
-        @return x-mem--px-to-rem($values, $rem-base);
-    }
-
-    $length: length($values);
-
-    @if $length == 1 {
-        @return x-mem--px-to-rem(nth($values, 1), $rem-base);
-    }
-
-    $rem-values: ();
-
-    @for $i from 1 through $length {
-        $rem-values: append($rem-values, x-mem--px-to-rem(nth($values, $i), $rem-base));
-    }
-
-    @return $rem-values;
+    @return x-mem--unit-calc('x-mem--px-to-rem', $values, $rem-base);
 }

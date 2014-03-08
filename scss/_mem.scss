@@ -65,7 +65,9 @@
 // @param    $context {String}             The context for the mem
 // @return            {Number|String|List} The converted rem value(s)
 @function x-mem($values, $context: null) {
-    @return x-mem--calc('x-mem--to-rem', $values, $context);
+    $mem-base: x-mem--get-contextual-mem-base($context);
+
+    @return x-mem--unit-calc('x-mem--to-rem', $values, $mem-base);
 }
 
 // Converts mem value(s) to px based on a mem context
@@ -74,36 +76,36 @@
 // @param    $context {String}             The context for the mem
 // @return            {Number|String|List} The converted px value(s)
 @function x-mem-fallback($values, $context: null) {
-    @return x-mem--calc('x-mem--to-px', $values, $context);
-}
-
-// Calculates rem/px representation of mem value(s) based on a mem context
-// @function x-mem--calc
-// @private
-// @param    $calculator {String}             The function name to calculate the single value
-// @param    $values     {Number|String|List} The mem value(s) to calculate rem/px
-// @param    $context    {String}             The context for the mem
-// @return               {Number|String|List} The calculated rem/px value(s)
-@function x-mem--calc($calculator, $values, $context: null) {
     $mem-base: x-mem--get-contextual-mem-base($context);
 
+    @return x-mem--unit-calc('x-mem--to-px', $values, $mem-base);
+}
+
+// Calculates unit representation of another unit value(s)
+// @function x-mem--unit-calc
+// @private
+// @param    $calculator {String}             The function name to calculate the single value
+// @param    $values     {Number|String|List} The unit value(s) to calculate the output unit value
+// @param    $unit-base  {Number}             The base unit value for the output unit value
+// @return               {Number|String|List} The calculated unit value(s)
+@function x-mem--unit-calc($calculator, $values, $unit-base) {
     @if type-of($values) == 'number' or type-of($values) == 'string' {
-        @return call($calculator, $values, $mem-base);
+        @return call($calculator, $values, $unit-base);
     }
 
     $length: length($values);
 
     @if $length == 1 {
-        @return call($calculator, nth($values, 1), $mem-base);
+        @return call($calculator, nth($values, 1), $unit-base);
     }
 
-    $rem-values: ();
+    $unit-values: ();
 
     @for $i from 1 through $length {
-        $rem-values: append($rem-values, call($calculator, nth($values, $i), $mem-base));
+        $unit-values: append($unit-values, call($calculator, nth($values, $i), $unit-base));
     }
 
-    @return $rem-values;
+    @return $unit-values;
 }
 
 // Calculates unit representation of another unit value based on a base unit value
