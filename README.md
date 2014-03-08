@@ -13,9 +13,7 @@ html {
 }
 article {
     // Defines the base MEM value for this module
-    @include x-mem-base(x-rem-calc(12px));  // 1Mem = .75Rem (12px)
-    // Or pass rem value directly
-    // @include x-mem-base(.75rem);
+    @include x-mem-base(.75rem);            // 1Mem = .75Rem (12px)
 
     font-size: x-mem-base-fallback();       // 12px the fallback below
     font-size: x-mem-base();                // .75Rem = 1Mem (12px)
@@ -73,8 +71,6 @@ or just copy ```crossass-mem``` folder and ```crosass-config``` folder of [Cross
 ```scss
 @import 'bower_components/crossass-config/scss/config';
 @import 'bower_components/crossass-mem/scss/mem';
-// Import only if you want to use x-rem-cal() to convert px to rem
-@import 'bower_components/crossass-mem/scss/rem';
 ```
 
 or
@@ -82,8 +78,6 @@ or
 ```scss
 @import 'your-folder/crossass-config/scss/config';
 @import 'your-folder/crossass-mem/scss/mem';
-// Import only if you want to use x-rem-cal() to convert px to rem
-@import 'your-folder/crossass-mem/scss/rem';
 ```
 
 ### Configuration
