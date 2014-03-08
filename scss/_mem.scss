@@ -106,6 +106,37 @@
     @return $rem-values;
 }
 
+// Calculates unit representation of another unit value based on a base unit value
+// @function x-mem--unit-to-unit
+// @private
+// @param    $value             {Number|String} The input unit value to calculate the output unit value
+// @param    $unit-base         {Number}        The base unit value for the output unit value
+// @param    $default-unit-base {Number}        The default base unit value for the output unit value
+// @param    $unit              {Number}        The 1 unit value of the output unit value
+// @param    $reverse           {Bool}          Whether calculate back the unit value from the input unit value
+// @return                      {Number|String} The calculated unit value
+@function x-mem--unit-to-unit($value, $unit-base, $default-unit-base, $unit, $reverse: false) {
+    @if $value == 'auto' {
+        @return $value;
+    }
+
+    @if $unit-base == null {
+        $unit-base: $default-unit-base;
+    }
+
+    @if $reverse {
+        $value: x-mem--strip-unit($value) / x-mem--strip-unit($unit-base);
+    } @else {
+        $value: x-mem--strip-unit($value) * x-mem--strip-unit($unit-base);
+    }
+
+    @if ($value == 0) {
+        @return 0;
+    }
+
+    @return $value * $unit;
+}
+
 // Calculates rem representation of a mem value based on a base mem value
 // @function x-mem--to-rem
 // @private
@@ -113,21 +144,7 @@
 // @param    $mem-base {Number}        The base mem value for the mem value
 // @return             {Number|String} The calculated rem value
 @function x-mem--to-rem($value, $mem-base: null) {
-    @if $value == 'auto' {
-        @return $value;
-    }
-
-    @if $mem-base == null {
-        $mem-base: x-mem--get-contextual-mem-base(null);
-    }
-
-    $value: x-mem--strip-unit($value) * x-mem--strip-unit($mem-base) * 1rem;
-
-    @if ($value == 0rem) {
-        $value: 0;
-    }
-
-    @return $value;
+    @return x-mem--unit-to-unit($value, $mem-base, x-mem--get-contextual-mem-base(null), 1rem);
 }
 
 // Calculates px representation of a mem value based on a base mem value
@@ -137,20 +154,8 @@
 // @param    $mem-base {Number}        The base mem value for the mem value
 // @return             {Number|String} The calculated px value
 @function x-mem--to-px($value, $mem-base: null) {
-    @if $value == 'auto' {
-        @return $value;
-    }
-
-    @if $mem-base == null {
-        $mem-base: x-mem--get-contextual-mem-base(null);
-    }
-
-    $value: x-mem--strip-unit($value) * x-mem--strip-unit($mem-base) * 1rem;
+    $value: x-mem--unit-to-unit($value, $mem-base, x-mem--get-contextual-mem-base(null), 1rem);
     $value: x-mem--rem-to-px($value);
-
-    @if ($value == 0px) {
-        $value: 0;
-    }
 
     @return $value;
 }
@@ -162,21 +167,7 @@
 // @param    $rem-base {Number}        The base rem value for the rem value
 // @return             {Number|String} The calculated rem value
 @function x-mem--px-to-rem($value, $rem-base: null) {
-    @if $value == 'auto' {
-        @return $value;
-    }
-
-    @if $rem-base == null {
-        $rem-base: x-config('x.mem.rem-base');
-    }
-
-    $value: x-mem--strip-unit($value) / x-mem--strip-unit($rem-base) * 1rem;
-
-    @if ($value == 0rem) {
-        $value: 0;
-    }
-
-    @return $value;
+    @return x-mem--unit-to-unit($value, $rem-base, x-config('x.mem.rem-base'), 1rem, true);
 }
 
 // Calculates px representation of a rem value based on a base rem value
@@ -186,21 +177,7 @@
 // @param    $rem-base {Number}        The base rem value for the rem value
 // @return             {Number|String} The calculated px value
 @function x-mem--rem-to-px($value, $rem-base: null) {
-    @if $value == 'auto' {
-        @return $value;
-    }
-
-    @if $rem-base == null {
-        $rem-base: x-config('x.mem.rem-base');
-    }
-
-    $value: x-mem--strip-unit($value) * x-mem--strip-unit($rem-base) * 1px;
-
-    @if ($value == 0px) {
-        $value: 0;
-    }
-
-    @return $value;
+    @return x-mem--unit-to-unit($value, $rem-base, x-config('x.mem.rem-base'), 1px);
 }
 
 // Strips the unit of a number value
