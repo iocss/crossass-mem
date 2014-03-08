@@ -162,16 +162,6 @@
     @return $value;
 }
 
-// Calculates rem representation of a px value based on a base rem value
-// @function x-mem--px-to-rem
-// @private
-// @param    $value    {Number|String} The px value to calculate rem
-// @param    $rem-base {Number}        The base rem value for the rem value
-// @return             {Number|String} The calculated rem value
-@function x-mem--px-to-rem($value, $rem-base: null) {
-    @return x-mem--unit-to-unit($value, $rem-base, x-config('x.mem.rem-base'), 1rem, true);
-}
-
 // Calculates px representation of a rem value based on a base rem value
 // @function x-mem--rem-to-px
 // @private

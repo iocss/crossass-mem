@@ -18,3 +18,13 @@
 @function x-rem-calc($values, $rem-base: null) {
     @return x-mem--unit-calc('x-mem--px-to-rem', $values, $rem-base);
 }
+
+// Calculates rem representation of a px value based on a base rem value
+// @function x-mem--px-to-rem
+// @private
+// @param    $value    {Number|String} The px value to calculate rem
+// @param    $rem-base {Number}        The base rem value for the rem value
+// @return             {Number|String} The calculated rem value
+@function x-mem--px-to-rem($value, $rem-base: null) {
+    @return x-mem--unit-to-unit($value, $rem-base, x-config('x.mem.rem-base'), 1rem, true);
+}
