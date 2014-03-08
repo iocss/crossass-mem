@@ -172,54 +172,6 @@
     @return x-mem--unit-to-unit($value, $rem-base, x-config('x.mem.rem-base'), 1px);
 }
 
-// Calculates em representation of a px value based on a base em value
-// @function x-mem--px-to-em
-// @private
-// @param    $value   {Number|String} The px value to calculate em
-// @param    $em-base {Number}        The base em value for the em value
-// @return            {Number|String} The calculated em value
-@function x-mem--px-to-em($value, $em-base: null) {
-    @if $value == 'auto' {
-        @return $value;
-    }
-
-    @if $em-base == null {
-        $em-base: x-config('x.mem.em-base');
-    }
-
-    $value: x-mem--strip-unit($value) / x-mem--strip-unit($em-base) * 1em;
-
-    @if ($value == 0em) {
-        $value: 0;
-    }
-
-    @return $value;
-}
-
-// Calculates px representation of a em value based on a base em value
-// @function x-mem--em-to-px
-// @private
-// @param    $value   {Number|String} The em value to calculate px
-// @param    $em-base {Number}        The base em value for the em value
-// @return            {Number|String} The calculated px value
-@function x-mem--em-to-px($value, $em-base: null) {
-    @if $value == 'auto' {
-        @return $value;
-    }
-
-    @if $em-base == null {
-        $em-base: x-config('x.mem.em-base');
-    }
-
-    $value: x-mem--strip-unit($value) * x-mem--strip-unit($em-base) * 1px;
-
-    @if ($value == 0px) {
-        $value: 0;
-    }
-
-    @return $value;
-}
-
 // Strips the unit of a number value
 // @function x-mem--strip-unit
 // @private
