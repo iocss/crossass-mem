@@ -14,7 +14,7 @@
         "scss/_mem.scss"
     ],
     "dependencies": {
-        "crossass-config": "*"
+        "crossass-config": ">=0.9.3"
     },
     "ignore"      : [
         "**/.*"

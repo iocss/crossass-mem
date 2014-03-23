@@ -6,7 +6,7 @@ Each HTML/CSS module can be separately scalable with Crossass Mem.
 
 ```scss
 // Defines the HTML font-size for the base REM value
-@include x-config('x.mem.rem-base', 16px);
+@include x-config-set('x.mem.rem-base', 16px);
 
 html {
     font-size: 16px;                        // 1Rem = 16px
@@ -84,7 +84,7 @@ or
 
 ```scss
 // Defines the HTML font-size for the base REM value
-@include x-config('x.mem.rem-base', 16px);
+@include x-config-set('x.mem.rem-base', 16px);
 
 html {
     font-size: 16px;  // This should be the same as `x.mem.rem-base` value

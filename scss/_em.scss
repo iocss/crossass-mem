@@ -4,13 +4,13 @@
 // @category em
 
 // The html font-size for the base em value
-@include x-config('x.mem.em-base', x-config('x.mem.rem-base'), $default: true);
+@include x-config-set('x.mem.em-base', x-config-get('x.mem.rem-base'), $default: true);
 
 // Gets the base em value
 // @function x-em-base
 // @return   {Number} The base em value
 @function x-em-base() {
-    @return x-config('x.mem.em-base');
+    @return x-config-get('x.mem.em-base');
 }
 
 // Converts px value(s) to em based on a base em value
@@ -29,5 +29,5 @@
 // @param    $em-base {Number}        The base em value for the em value
 // @return            {Number|String} The calculated em value
 @function x-mem--px-to-em($value, $em-base: null) {
-    @return x-mem--unit-to-unit($value, $em-base, x-config('x.mem.em-base'), 1em, true);
+    @return x-mem--unit-to-unit($value, $em-base, x-config-get('x.mem.em-base'), 1em, true);
 }

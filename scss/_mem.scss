@@ -4,15 +4,15 @@
 // @category mem
 
 // The html font-size for the base rem value
-@include x-config('x.mem.rem-base', 16px, $default: true);
+@include x-config-set('x.mem.rem-base', 16px, $default: true);
 
 // The current context for the base mem value
 // @private
-@include x-config('x.mem.-current-context', '', $default: true);
+@include x-config-set('x.mem.-current-context', '', $default: true);
 
 // The storage for the context-based mem value
 // @private
-@include x-config('x.mem.-context', ('-base': x-config('x.mem.rem-base')), $default: true);
+@include x-config-set('x.mem.-context', ('-base': x-config-get('x.mem.rem-base')), $default: true);
 
 // Sets a base mem value for a context
 // @mixin x-mem-base
@@ -169,7 +169,7 @@
 // @param    $rem-base {Number}        The base rem value for the rem value
 // @return             {Number|String} The calculated px value
 @function x-mem--rem-to-px($value, $rem-base: null) {
-    @return x-mem--unit-to-unit($value, $rem-base, x-config('x.mem.rem-base'), 1px);
+    @return x-mem--unit-to-unit($value, $rem-base, x-config-get('x.mem.rem-base'), 1px);
 }
 
 // Strips the unit of a number value
@@ -191,7 +191,7 @@
         $context: '-base';
     }
 
-    $context: x-config('x.mem.-current-context', $context);
+    $context: x-config-set('x.mem.-current-context', $context);
 
     @return $context;
 }
@@ -203,7 +203,7 @@
 // @return            {Number} The base mem value
 @function x-mem--get-contextual-mem-base($context: null) {
     @if $context == null {
-        $context: x-config('x.mem.-current-context');
+        $context: x-config-get('x.mem.-current-context');
     }
 
     @if $context == '' {
@@ -220,7 +220,7 @@
         @return null;
     }
 
-    @return x-config($path);
+    @return x-config-get($path);
 }
 
 // Sets a base mem value for a context
@@ -231,14 +231,14 @@
 // @return            {Number} The base mem value
 @function x-mem--set-contextual-mem-base($value, $context: null) {
     @if $context == null {
-        $context: x-config('x.mem.-current-context');
+        $context: x-config-get('x.mem.-current-context');
     }
 
     @if $context == '' {
         $context: '-base';
     }
 
-    $value: x-config('x.mem.-context.' + $context, x-mem--strip-unit($value) * 1rem);
+    $value: x-config-set('x.mem.-context.' + $context, x-mem--strip-unit($value) * 1rem);
 
     @return $value;
 }
