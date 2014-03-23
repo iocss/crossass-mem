@@ -1,6 +1,6 @@
 {
     "name"        : "crossass-mem",
-    "version"     : "0.9.1",
+    "version"     : "0.9.2",
     "description" : "A module-relative rem unit library (mixin / function) for Sass.",
     "keywords"    : [
         "sass",
